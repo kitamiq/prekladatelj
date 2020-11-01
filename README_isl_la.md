@@ -16,7 +16,7 @@ Možno podavati teksty na obojih pismah (vključajuči [Flavorizaciju](#Flavoriz
 ## Postavjenje
 Kako dlja drugyh Ruby gemov.
 
-Vpiši siju liniju v Gemfile tvojej aplikaciji (ako koristaješ onyj):
+Vpiši seju liniju v Gemfile tvojej aplikaciji (ako koristaješ onyj):
 
 ```ruby
 gem 'prekladatelj'
