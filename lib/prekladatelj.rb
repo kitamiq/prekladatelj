@@ -34,6 +34,23 @@ module Prekladatelj
 
   end
 =end
+  class Helper
+    def self.smart_split(string)
+      a = []
+      last = ''
+      (0..string.length-1).each do |l|
+        if string[l]==' '
+          a.append last unless last.empty?
+          a.append string[l]
+          last = ''
+        else
+          last = last + string[l]
+        end
+        a.append last if l==string.length-1
+      end
+      a
+    end
+  end
 
   class Cyrillic
     UPPER  = %w[А Б Ц Ч Д Е Є Ф Г Х И Ј К Л Љ М Н Њ О П Р С Ш Т У В Ы З Ж]
@@ -58,7 +75,7 @@ module Prekladatelj
     EASTERN = {
         "ju" => "ю",
         "ja" => "я",
-        "ě" => "е",
+        "ě" => "є",
         "je" => "е",
         "lj" => "ль",
         "nj" => "нь",
@@ -71,19 +88,25 @@ module Prekladatelj
       str = String line[0..-1]
 
       if args.any? :eastern
-        line = str.split.to_a
+        line = Helper::smart_split str
         line.each do |word|
-          if word.start_with? "je"
-            word["je"] = "е"
-          end
-          if word.gsub(/\W+/, '') == "se"
-            word["se"] = "ся"
+          while word =~ /[eě](je)/
+            word["eje"] = "ее" if word.include? 'eje'
+            word["ěje"] = "єе" if word.include? 'ěje'
           end
           while word =~ /[^aiueoyj](je)/
             word["je"] = "ье"
           end
+          while word =~ /(ji)/
+            word["ji"] = "и"
+          end
+          word["je"] = "е" if word.start_with? "je"
+          word["se"] = "ся" if word.gsub(/\W+/, '') == "se"
+          while word =~ /[^aiueoyj](je)/
+            word["je"] = "ье"
+          end
         end
-        str = line.join " "
+        str = line.join ""
 
         EASTERN.each_pair do |k, v|
           str.gsub! k, v

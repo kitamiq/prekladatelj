@@ -4,21 +4,28 @@
 
 [Čitati v Medžuslovjanskom jezyku](README_isl_la.md) // [Читати в Меджусловjанском jезыку](README_isl_cy.md)
 
-A Ruby gem (library) for transliterating [Interslavic](http://steen.free.fr/interslavic/index.html) texts from Latin to Cyrillic and vice versa.
-Like this:
+A CLI program and a Ruby gem (library) for transliterating [Interslavic](http://steen.free.fr/interslavic/index.html) texts from Latin to Cyrillic and vice versa.
+Like this (as a program):
 
+```shell
+prekladatelj -c --eastern file1.txt file2.html file3
+```
+
+or like this (as a library):
 ```ruby
 "Меджусловјанскы јест језык, кторы Словјани разных народностиј користајут".to_latin
 #=> "Medžuslovjansky jest jezyk, ktory Slovjani raznyh narodnostij koristajut"
 "Jabloko sut jedlivy plod".to_cyrillic
 #=> "Јаблоко сут једливы плод"
 ```
-This is useful for Rails website or a Ruby program in Interslavic, allowing you to provide content in both official writing systems (including [Flavourisation](#Flavourisation)) without manual transliteration
+This is useful for a Rails website or a Ruby program in Interslavic, allowing you to provide content in both official writing systems (including [Flavourisation](#Flavourisation)) without manual transliteration
 
 ## Installation
-As for any Ruby gem.
 
-Add this line to your application's Gemfile:
+    $ gem install prekladatelj
+(requires ``rubygems`` to be installed)
+
+If you only need the library, add this line to your application's Gemfile:
 
 ```ruby
 gem 'prekladatelj'
@@ -28,12 +35,50 @@ And then execute:
 
     $ bundle install
 
-Or install it yourself as:
-
-    $ gem install prekladatelj
-
-(alternatively, if you're familiar with gems development, clone this repository and perform ``rake install``)
+_(alternatively, if you're familiar with gems development, clone this repository and perform ``rake install``)_
 ## Usage
+
+### As a CLI tool
+Since version 0.1.2, _Prekladatelj_ has a command-line interface:
+```shell
+prekladatelj -c --eastern file1.txt file2.html file3
+```
+You will have it available in your shell as soon as you install it with the ``gem`` command.
+
+Execute it with ``-c`` or ``-l`` flag (letters mean _"to ``c``yrillic or ``l``atin"_), optionally passing 
+flavourisation flag, like ``--eastern``, then list the paths to the files you would like to transliterate to the specified alhpabet.
+*nix-style files selection is supported, hence ``*`` means "all files in this directory", ``*_isv.html`` is "all files ending with _isv.html here" and so on.
+Prekladatelj supports files with ``.txt``, ``.html`` or no suffix/extension and ignores other files, but you may force it to transliterate those with other extensions
+using the ``--force`` flag.
+
+Run ``prekladatelj`` without arguments to see all options/flags available.
+
+Prekladatelj is capable of **intelligent HTML files processing**, so it **doesn't** turn ``<title>`` into ``<титле>``.
+Also, it doesn't transliterate content of tags of ``notranslit`` CSS class, so you may use it to avoid unnecessary translit.
+
+Long story short, it looks like this:
+```shell
+prekladatelj -c isv.html
+```
+
+_isv.html:_
+```html
+    <title class="notranslit">le website</title>
+    <center>
+    <h1>Medžuslovjansky v světe internetnoj komunikaciji</h1>
+    <small>(myslji ob interslavike)</small>
+    </center>
+```
+_isv_c.html:_
+```html
+    <title class="notranslit">le website</title>
+    <center>
+    <h1>Меджусловјанскы в свєте интернетној комуникацији</h1>
+    <small>(мыслји об интерславике)</small>
+    </center>
+```
+
+### As a library
 
 **Prekladatelj** extends ``String``, so you will want to use it like this:
 
@@ -50,10 +95,11 @@ However, a more complicated way is possible (in case you need it?..):
 require 'prekladatelj'
 Prekladatelj::Cyrillic::to_latin "изjаснити" #=> "izjasniti"
 Prekladatelj::Latin::to_cyrillic "Japonija"  #=> "Јапонија"
+Prekladatelj::Latin::to_cyrillic "Japonija", :eastern  #=> "Япония"
 ```
-The algorithm may not be the fastest, so if you deal with large texts you may want to save 
-the transliteration for further usage unless your content is dynamic.
-Note that destructive methods (like ``to_latin!``) are not yet implemented, so you have to assign methods' output to a variable
+_Prekladatelj_ is quite fast but if you deal with large texts you may want to save 
+the transliteration for further usage (unless your content is dynamic).
+Note that the original string is never changed, so you have to assign methods' output to a variable
 in order to save the transliteration, like this:
 ```ruby
 cyrillic = some_text.to_cyrillic
@@ -73,7 +119,7 @@ Besides two writing systems, Interslavic offers flavourisation. That means, if y
 # standard: "Богоjaвjeнje"
 ``` 
 
-As of version 0.1.0, the only 'flavour' available for ``to_cyrillic`` is ``:eastern``, which looks much more familiar for *Russians, Ukrainians and Belarusians*.
+As of version 0.1.2, the only 'flavour' available for ``to_cyrillic`` is ``:eastern``, which looks much more familiar for *Russians, Ukrainians and Belarusians*.
 (letters **я**, **ю**, **щ**; "ся" as a 'self' particle etc.)
 ```ruby
 Prekladatelj::Latin::to_cyrillic "jaščer", :eastern
@@ -82,11 +128,11 @@ Prekladatelj::Latin::to_cyrillic "jaščer", :eastern
 ```
 
 ## Restrictions
-* As of 0.1.0, Prekladatelj requires the original text to be written in [current version](http://steen.free.fr/interslavic/orthography.html#standard_alphabet) 
+* As of 0.1.2, Prekladatelj requires the original text to be written in [current version](http://steen.free.fr/interslavic/orthography.html#standard_alphabet) 
 of Interslavic orthography standard. For example, previously used ѣ as Є in Cyrillic would not be recognized (yet). This
 also means that flavourised texts cannot be converted back (at least for now)
-* ``:eastern`` flavour can only be applied to Latin string; for flavouring Cyrillic, first convert it in Latin (this will be fixed soon) 
-* ``cz sz zs`` and another alternatives for diacritic ``č, š, ž`` are not yet supported
+* ``:eastern`` flavour can only be applied to Latin string; for flavouring Cyrillic, first convert it in Latin
+* ``cz sz zs`` and another alternatives for diacritic ``č, š, ž`` are not supported
 * Etymological alphabet is unlikely to be ever supported
 * Glagolica is not yet supported
 
@@ -100,7 +146,7 @@ Better way, fix the problem yourself, see "Contributing" below
 
 ## Contributing
 
-Prekladatelj has a huge room to improve in terms of accuracy and speed. If you know Ruby, feel free to fork this repo
+Prekladatelj has a huge room to improve in terms of accuracy, alphabets and flavors support. If you know Ruby, feel free to fork this repo
 and apply your improvements, pull requests are welcome.
 
 If you know another language, you may implement you own version of Prekladatelj in that language

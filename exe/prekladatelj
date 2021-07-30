@@ -1,3 +1,100 @@
 #!/usr/bin/env ruby
 
+USAGE = "Usage:\n   prekladatelj [options] [files...]
+Options:
+[MODES]
+  -l          transliterate into latin
+  -c          transliterate into cyrillic
+[FLAVORS] (optional, see README.md for more info)
+  --eastern   'eastern' flavor (only with -c)
+[OTHER] (optional)
+  -s          suffix for new transliterated files, matches mode (_c, _l) by default, must not have spaces
+  --force     force transliteration of possibly unsupported formats (see README for list)
+              Warning! Might cause unexpected results if combined with '*' as a file selector, such as image or document corruption. Still doesn't overwrite any source files, though. Oh God, よかった。
+
+Examples:
+    prekladatelj -l file1.txt
+    prekladatelj -s _cyr -c file1.txt foobar.html
+        => file1_cyr.txt, foobar_cyr.html
+
+to transliterate every (supported) file in the current directory into cyrillic with eastern flavor:
+    prekladatelj -c --eastern *"
+
 require "prekladatelj"
+
+puts USAGE if ARGV.empty? or (ARGV & %w(--help -help -h)).any?
+
+FLAVORS = %w(--eastern) # todo
+mode = 'c'
+mode = 'l' if ARGV.any? '-l'
+
+suffix = "_#{mode}"
+
+no_title = ARGV.any? '--no-title' #
+force = ARGV.any? '--force'
+
+if ARGV.any? '-s'
+  suffix = ARGV.pop(ARGV.index('-s') + 1)
+end
+
+flavour = (FLAVORS & ARGV)[0]
+flavour = flavour.delete_prefix('--').to_sym if flavour
+
+files = ARGV.reject { |x| x.start_with? '-' }
+
+files.each do |fname|
+  Dir[fname].each do |file|
+    if %w(htm html).any? { |x| file.end_with? x}
+      # process HTML documents
+      require 'nokogiri'
+      text = Nokogiri::HTML(File.open(fname))
+      case mode
+      when 'c'
+        text.traverse do |node|
+          unless node['class'] == 'notranslit' # && !node.children.empty?
+            node.children.each do |child|
+              if child.class == Nokogiri::XML::Text
+                child.content = child.content.to_cyrillic flavour
+              end
+            end
+          end
+        rescue nil
+        end
+      else
+        text.traverse do |node|
+          unless node['class'] == 'notranslit' # && !node.children.empty?
+            node.children.each do |child|
+              if child.class == Nokogiri::XML::Text
+                child.content = child.content.to_cyrillic flavour
+              end
+            end
+          end
+        rescue nil
+        end
+      end
+      #puts suffix
+      q = file.split '.'
+      File.open("#{file.delete_suffix ".#{q[-1]}"}#{suffix || '_c'}.#{q[-1]}", 'w') do |newfile|
+        newfile.write text.to_s
+      end
+
+
+    elsif %w(.txt .log).any? { |x| file.end_with? x} || file.count('.') == 0 || force
+      # files without suffix are presumed to be plain text
+      # process plain text
+      text = File.open(file) do |fl|
+        q = file.split '.'
+        File.open("#{file.delete_suffix ".#{q[-1]}"}#{suffix || '_c'}.#{q[-1]}", 'w') do |newfile|
+          case mode # TODO glagolica??
+          when 'c'
+            newfile.write fl.read.to_s.to_cyrillic flavour
+          when 'l'
+            newfile.write fl.read.to_s.to_latin flavour
+          else
+            newfile.write fl.read.to_s.to_latin flavour
+          end
+        end
+      end
+    end
+  end
+end

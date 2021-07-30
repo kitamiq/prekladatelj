@@ -1,8 +1,14 @@
 # Prekladatelj ![* Interslavic flag *](http://steen.free.fr/interslavic/slovianski.ico)
 [Read in English](README.md) // [Читати в Меджусловjанском jезыку](README_isl_cy.md)
 
-Gem Ruby (biblioteka) dlja transliteraciji tekstov v [Medžuslovjanskom](http://steen.free.fr/interslavic/index.html) jezyku s Latinice na Kirilicu i obratno.
-Tak:
+CLI programa i gem Ruby (biblioteka) dlja transliteraciji tekstov v [Medžuslovjanskom](http://steen.free.fr/interslavic/index.html) jezyku s Latinice na Kirilicu i obratno.
+Tak (kako programa):
+
+```shell
+prekladatelj -c --eastern file1.txt file2.html file3
+```
+
+ili tak (kako biblioteka):
 
 ```ruby
 "Меджусловјанскы јест језык, кторы Словјани разных народностиј користајут".to_latin
@@ -14,9 +20,11 @@ To jest dobro dlja veb-sajtov na Rails ili program na Ruby, koristajučim Medžu
 Možno podavati teksty na obojih pismah (vključajuči [Flavorizaciju](#Flavorizacija)) bez ručnogo prekladu.
 
 ## Postavjenje
-Kako dlja drugyh Ruby gemov.
 
-Vpiši seju liniju v Gemfile tvojej aplikaciji (ako koristaješ onyj):
+    $ gem install prekladatelj
+(potrěbno ``rubygems``)
+
+Ako li jedino biblioteka potrěbna, piši seju liniju v Gemfile tvojej aplikaciji (ako koristaješ onyj):
 
 ```ruby
 gem 'prekladatelj'
@@ -26,12 +34,49 @@ Potom izpolni:
 
     $ bundle install
 
-Ili postavj sam črez:
-
-    $ gem install prekladatelj
-
 (ako li ty znaješ, kako jest tvorimy gemy, kloniruj sej repozitorij i izpolni ``rake install``)
 ## Koristanje
+
+### Kako programa
+Od versiji 0.1.2 _Prekladatelj_ imaje interfejs redka nakaza (komandnoj liniji, CLI):
+```shell
+prekladatelj -c --eastern file1.txt file2.html file3
+```
+Sej interfejs bude dostupny poslě postavjenja s nakazom ``gem install``
+
+Izpolni s opcijeju ``-c`` ili ``-l`` (to znači prěkladati do kirili``c``i ili ``l``atinici), takože jest možno davati flavorizaciju,
+napriklad ``--eastern``, poslě piši nazvy fajlov, ktory jest potrěbno transliterovati do sego alfabeta.
+Izbor fajlov kako v *nix jest dostupny, tomu ``*`` značit "vse fajly v sej papke/direktoriji", ``*_isv.html`` jest "vse fajly, ktory končajut se s _isv.html" i tako dalje.
+Prekladatelj čitaje fajly ``.txt``, ``.html`` ili bez sufiksa/razširjenja, drugy fajly ignoruje, jednako jest možno nasilno transliteroavti jih s opcijeju ``--force``.
+
+Izpolni ``prekladatelj`` bez opcij, da by viděti vsi dostupny opciji.
+
+Prekladatelj može tvoriti razumno obrabotanje HTML fajlov, tomu on ne obračaje ``<title>`` v ``<титле>``.
+Takože on ne transliteruje kontent v tegah CSS klasa ``notranslit``, tomu možno koristati sej klas dlja nepreklada něktorogo kontenta.
+
+Kratko govoreči:
+```shell
+prekladatelj -c isv.html
+```
+
+_isv.html:_
+```html
+    <title class="notranslit">le website</title>
+    <center>
+    <h1>Medžuslovjansky v světe internetnoj komunikaciji</h1>
+    <small>(myslji ob interslavike)</small>
+    </center>
+```
+_isv_c.html:_
+```html
+    <title class="notranslit">le website</title>
+    <center>
+    <h1>Меджусловјанскы в свєте интернетној комуникацији</h1>
+    <small>(мыслји об интерславике)</small>
+    </center>
+```
+
+### Kako biblioteka
 
 **Prekladatelj** razširjaje ``String``, tomu možno koristati tako:
 
@@ -48,11 +93,12 @@ Jednako bolje težkij sposob jest možlivy (jestli potrebno?..):
 require 'prekladatelj'
 Prekladatelj::Cyrillic::to_latin "изjаснити" #=> "izjasniti"
 Prekladatelj::Latin::to_cyrillic "Japonija"  #=> "Јапонија"
+Prekladatelj::Latin::to_cyrillic "Japonija", :eastern  #=> "Япония"
 ```
-Algoritm može byti ne bystry, tomu veliky teksty rekomendovano zapisyvati v premennoju dlja daljšego koristanija, jestli
+_Prekladatelj_ jest bystry/brzy, ale veliky teksty rekomendovano zapisyvati v premennoju dlja daljšego koristanija, jestli
 kontent ne jest dinamičesky.
 
-Obrati pozornost, že destruktivny metody (kako ``to_latin!``) ješče ne jest stvoreny, i potrebno pisati izhod metodov v novu premennoju,
+Obrati pozornost, že originalny redok nikogdy ne jest izměnjajemy i potrebno pisati izhod metodov v novu premennoju,
 da by shraniti transliteraciju. Vot tak:
 
 ```ruby
@@ -71,7 +117,7 @@ Jestli potrebno obratiti se k ljudam jedinogo roda, možno koristati [flavorizac
 # standard: "Богоjaвjeнje"
 ``` 
 
-K času versiji 0.1.0, jediny 'flavor' dostupny dlja ``to_cyrillic`` jest ``:eastern``,
+K času versiji 0.1.2, jediny 'flavor' dostupny dlja ``to_cyrillic`` jest ``:eastern``,
 ktory legše čitati *Russkym, Ukrajincam i Belorusam*.
 (bukvy **я**, **ю**, **щ**; 'ся' zamesto 'се' i tako dalje)
 ```ruby
@@ -81,11 +127,11 @@ Prekladatelj::Latin::to_cyrillic "jaščer", :eastern
 ```
 
 ## Ograničenja
-* V versiji 0.1.0, Prekladatelju treba, že tekst jest pisany po [sejčasnomu standardu](http://steen.free.fr/interslavic/orthography.html#standard_alphabet) pravopisu.
+* V versiji 0.1.2, Prekladatelju treba, že tekst jest pisany po [sejčasnomu standardu](http://steen.free.fr/interslavic/orthography.html#standard_alphabet) pravopisu.
 Napriklad, raneje koristana v Kirilice ѣ (kako Ě) ne bude poznana (poka). Flavorizovany
 teksty takože poka ne možut byti transliterovany
 * ``:eastern`` može byti izkoristajuča toliko s Latinicej; dlja flavorizaciji Kirilicy izprva prekladi jej do Latinicy (se skoro bude popravjeno) 
-* ``cz sz zs`` kako alternativy ``č, š, ž`` dopoka ne jest dostupny
+* ``cz sz zs`` kako alternativy ``č, š, ž`` ne jest dostupny
 * Etimologična abeceda jedva kogdakoli bude dostupna
 * Glagolica dopoka ne jest dostupna
 

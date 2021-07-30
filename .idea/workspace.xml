@@ -11,13 +11,14 @@
   </component>
   <component name="ChangeListManager">
     <list default="true" id="e49f8012-4128-4ab9-b89d-c52536db8768" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/prekladatelj.iml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/prekladatelj.iml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/Gemfile.lock" beforeDir="false" afterPath="$PROJECT_DIR$/Gemfile.lock" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README.md" beforeDir="false" afterPath="$PROJECT_DIR$/README.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/README_isl_cy.md" beforeDir="false" afterPath="$PROJECT_DIR$/README_isl_cy.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/README_isl_la.md" beforeDir="false" afterPath="$PROJECT_DIR$/README_isl_la.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/exe/prekladatelj" beforeDir="false" afterPath="$PROJECT_DIR$/exe/prekladatelj" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/lib/prekladatelj.rb" beforeDir="false" afterPath="$PROJECT_DIR$/lib/prekladatelj.rb" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/prekladatelj.gemspec" beforeDir="false" afterPath="$PROJECT_DIR$/prekladatelj.gemspec" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test/prekladatelj_test.rb" beforeDir="false" afterPath="$PROJECT_DIR$/test/prekladatelj_test.rb" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -35,11 +36,14 @@
   </component>
   <component name="PropertiesComponent">
     <property name="RunOnceActivity.OpenProjectViewOnStart" value="true" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
     <property name="WebServerToolWindowFactoryState" value="false" />
     <property name="last.edited.regexp" value="jestjenie&#10;" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
     <property name="nodejs_package_manager_path" value="npm" />
+    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
-  <component name="RunManager" selected="IRB.irb">
+  <component name="RunManager" selected="Rake.install: prekladatelj">
     <configuration name="irb" type="IrbRunConfigurationType" factoryName="IRB console" temporary="true">
       <module name="prekladatelj" />
       <IRB_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
@@ -49,14 +53,15 @@
       <IRB_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
       <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov">
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" IGNORE_RCOVRT="true" ENABLE_BRANCH_COVERAGE="true" ENABLE_FORKED_COVERAGE="true">
         <COVERAGE_PATTERN ENABLED="true">
           <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
         </COVERAGE_PATTERN>
       </EXTENSION>
-      <IRB_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$APPLICATION_HOME_DIR$/plugins/ruby/rb/testing/runner/irb.rb" />
-      <IRB_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="--simple-prompt --singleline" />
-      <IRB_RUN_CONFIG NAME="IS_RAILS_CONSOLE" VALUE="false" />
+      <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
+      <IRB_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="/usr/bin/irb" />
+      <IRB_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="--simple-prompt --nomultiline --nocolorize" />
+      <IRB_RUN_CONFIG NAME="CONSOLE_TYPE" VALUE="IRB" />
       <method v="2" />
     </configuration>
     <configuration name="install: prekladatelj" type="RakeRunConfigurationType" factoryName="Rake" temporary="true">
@@ -68,11 +73,12 @@
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="myPassParentEnvs" VALUE="true" />
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
       <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov">
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" ENABLE_FORKED_COVERAGE="true">
         <COVERAGE_PATTERN ENABLED="true">
           <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
         </COVERAGE_PATTERN>
       </EXTENSION>
+      <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_NAME" VALUE="install" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ARGS" VALUE="" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_ATTACHED_TEST_FRAMEWORKS" VALUE="" />
@@ -80,6 +86,25 @@
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_DRYRUN" VALUE="false" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_PREREQS" VALUE="false" />
       <RAKE_RUN_CONFIG_SETTINGS_ID NAME="RAKE_TASK_OPTION_TESTOPTS" VALUE="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="console" type="RubyRunConfigurationType" factoryName="Ruby">
+      <module name="prekladatelj" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" IGNORE_RCOVRT="true" ENABLE_BRANCH_COVERAGE="true" ENABLE_FORKED_COVERAGE="true">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/bin/console" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
       <method v="2" />
     </configuration>
     <configuration name="prekladatelj" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
@@ -91,7 +116,7 @@
       <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
       <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
       <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
-      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov">
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" ENABLE_FORKED_COVERAGE="true">
         <COVERAGE_PATTERN ENABLED="true">
           <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
         </COVERAGE_PATTERN>
@@ -101,12 +126,39 @@
       <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="" />
       <method v="2" />
     </configuration>
+    <configuration name="ruby exe/prekladatelj --mode latin file1 file2" type="RubyRunConfigurationType" factoryName="Ruby" temporary="true">
+      <module name="prekladatelj" />
+      <RUBY_RUN_CONFIG NAME="RUBY_ARGS" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="WORK DIR" VALUE="$MODULE_DIR$" />
+      <RUBY_RUN_CONFIG NAME="SHOULD_USE_SDK" VALUE="false" />
+      <RUBY_RUN_CONFIG NAME="ALTERN_SDK_NAME" VALUE="" />
+      <RUBY_RUN_CONFIG NAME="myPassParentEnvs" VALUE="true" />
+      <EXTENSION ID="BundlerRunConfigurationExtension" bundleExecEnabled="false" />
+      <EXTENSION ID="JRubyRunConfigurationExtension" NailgunExecEnabled="false" />
+      <EXTENSION ID="RubyCoverageRunConfigurationExtension" track_test_folders="true" runner="rcov" IGNORE_RCOVRT="true" ENABLE_BRANCH_COVERAGE="true" ENABLE_FORKED_COVERAGE="true">
+        <COVERAGE_PATTERN ENABLED="true">
+          <PATTERN REGEXPS="/.rvm/" INCLUDED="false" />
+        </COVERAGE_PATTERN>
+      </EXTENSION>
+      <EXTENSION ID="org.jetbrains.plugins.ruby.rails.run.RailsRunConfigurationExtension" SCRATCH_USE_RAILS_RUNNER="false" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_PATH" VALUE="$MODULE_DIR$/exe/prekladatelj" />
+      <RUBY_RUN_CONFIG NAME="SCRIPT_ARGS" VALUE="--mode latin file1 file2" />
+      <method v="2" />
+    </configuration>
+    <list>
+      <item itemvalue="Rake.install: prekladatelj" />
+      <item itemvalue="Ruby.console" />
+      <item itemvalue="Ruby.prekladatelj" />
+      <item itemvalue="Ruby.ruby exe/prekladatelj --mode latin file1 file2" />
+      <item itemvalue="Ruby Console.irb" />
+    </list>
     <recent_temporary>
       <list>
-        <item itemvalue="IRB.irb" />
         <item itemvalue="Rake.install: prekladatelj" />
         <item itemvalue="Ruby.prekladatelj" />
-        <item itemvalue="IRB.irb" />
+        <item itemvalue="Ruby.ruby exe/prekladatelj --mode latin file1 file2" />
+        <item itemvalue="Ruby Console.irb" />
+        <item itemvalue="Ruby Console.irb" />
       </list>
     </recent_temporary>
   </component>
@@ -121,6 +173,14 @@
       <updated>1603971584518</updated>
       <workItem from="1603971588509" duration="10814000" />
       <workItem from="1604067756668" duration="35006000" />
+      <workItem from="1604541794400" duration="25000" />
+      <workItem from="1626599452866" duration="3765000" />
+      <workItem from="1626679275361" duration="98000" />
+      <workItem from="1626679394452" duration="20406000" />
+      <workItem from="1626854542269" duration="5442000" />
+      <workItem from="1627367873150" duration="5738000" />
+      <workItem from="1627450043461" duration="4549000" />
+      <workItem from="1627613752894" duration="1429000" />
     </task>
     <servers />
   </component>
@@ -137,44 +197,13 @@
         </entry>
       </map>
     </option>
-  </component>
-  <component name="WindowStateProjectService">
-    <state x="0" y="0" width="1081" height="732" key="#com.intellij.execution.impl.EditConfigurationsDialog" timestamp="1603973909648">
-      <screen x="0" y="0" width="1366" height="732" />
-    </state>
-    <state x="0" y="0" width="1081" height="732" key="#com.intellij.execution.impl.EditConfigurationsDialog/0.0.1366.732@0.0.1366.732" timestamp="1603973909648" />
-    <state x="466" y="133" key="FileChooserDialogImpl" timestamp="1603973845212">
-      <screen x="0" y="0" width="1366" height="732" />
-    </state>
-    <state x="466" y="133" key="FileChooserDialogImpl/0.0.1366.732@0.0.1366.732" timestamp="1603973845212" />
-    <state width="1320" height="164" key="GridCell.Tab.0.bottom" timestamp="1604198185296">
-      <screen x="0" y="0" width="1366" height="732" />
-    </state>
-    <state width="1320" height="164" key="GridCell.Tab.0.bottom/0.0.1366.732@0.0.1366.732" timestamp="1604198185296" />
-    <state width="1320" height="164" key="GridCell.Tab.0.center" timestamp="1604198185295">
-      <screen x="0" y="0" width="1366" height="732" />
-    </state>
-    <state width="1320" height="164" key="GridCell.Tab.0.center/0.0.1366.732@0.0.1366.732" timestamp="1604198185295" />
-    <state width="1320" height="164" key="GridCell.Tab.0.left" timestamp="1604198185295">
-      <screen x="0" y="0" width="1366" height="732" />
-    </state>
-    <state width="1320" height="164" key="GridCell.Tab.0.left/0.0.1366.732@0.0.1366.732" timestamp="1604198185295" />
-    <state width="1320" height="164" key="GridCell.Tab.0.right" timestamp="1604198185295">
-      <screen x="0" y="0" width="1366" height="732" />
-    </state>
-    <state width="1320" height="164" key="GridCell.Tab.0.right/0.0.1366.732@0.0.1366.732" timestamp="1604198185295" />
-    <state x="337" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser" timestamp="1604128537879">
-      <screen x="0" y="0" width="1366" height="732" />
-    </state>
-    <state x="337" y="0" key="com.intellij.openapi.editor.actions.MultiplePasteAction$ClipboardContentChooser/0.0.1366.732@0.0.1366.732" timestamp="1604128537879" />
-    <state x="346" y="52" width="672" height="678" key="search.everywhere.popup" timestamp="1604147072143">
-      <screen x="0" y="0" width="1366" height="732" />
-    </state>
-    <state x="346" y="52" width="672" height="678" key="search.everywhere.popup/0.0.1366.732@0.0.1366.732" timestamp="1604147072143" />
+    <option name="oldMeFiltersMigrated" value="true" />
   </component>
   <component name="com.intellij.coverage.CoverageDataManagerImpl">
-    <SUITE FILE_PATH="coverage/prekladatelj@prekladatelj.rcov" NAME="prekladatelj Coverage Results" MODIFIED="1604122001181" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib" MODULE_NAME="prekladatelj" />
-    <SUITE FILE_PATH="coverage/prekladatelj@install__prekladatelj.rcov" NAME="install: prekladatelj Coverage Results" MODIFIED="1604123117288" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="prekladatelj" />
-    <SUITE FILE_PATH="coverage/prekladatelj@irb.rcov" NAME="irb Coverage Results" MODIFIED="1604156821652" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="prekladatelj" />
+    <SUITE FILE_PATH="coverage/prekladatelj@prekladatelj.rcov" NAME="prekladatelj Coverage Results" MODIFIED="1626684557531" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$/lib" MODULE_NAME="prekladatelj" />
+    <SUITE FILE_PATH="coverage/prekladatelj@ruby_exe_prekladatelj___mode_latin_file1_file2.rcov" NAME="ruby exe/prekladatelj --mode latin file1 file2 Coverage Results" MODIFIED="1626680942210" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="prekladatelj" />
+    <SUITE FILE_PATH="coverage/prekladatelj@install__prekladatelj.rcov" NAME="install: prekladatelj Coverage Results" MODIFIED="1627368029999" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="prekladatelj" />
+    <SUITE FILE_PATH="coverage/prekladatelj@console.rcov" NAME="console Coverage Results" MODIFIED="1626679683163" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="prekladatelj" />
+    <SUITE FILE_PATH="coverage/prekladatelj@irb.rcov" NAME="irb Coverage Results" MODIFIED="1626679696956" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="rcov" COVERAGE_BY_TEST_ENABLED="true" COVERAGE_TRACING_ENABLED="false" WORKING_DIRECTORY="$PROJECT_DIR$" MODULE_NAME="prekladatelj" />
   </component>
 </project>
